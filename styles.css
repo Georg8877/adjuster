@@ -418,8 +418,10 @@ body {
 
 .parameters-controls {
     display: flex;
+    flex-direction: column;
     align-items: center;
     gap: 1.5rem;
+    padding: 2rem;
 }
 
 .address-control {
@@ -1139,9 +1141,10 @@ body.am8-active .buttons-container {
 /* PM tab specific positioning */
 body.pm-active .parameters-controls {
     display: flex !important;
-    flex-direction: column !important;
+    flex-direction: row !important;
     align-items: flex-start !important;
     width: 100% !important;
+    justify-content: flex-start !important;
 }
 
 body.pm-active .address-grid {
@@ -1219,6 +1222,338 @@ body.pm-active #writeBtn {
     cursor: pointer !important;
     min-width: 120px !important;
     flex-shrink: 0 !important;
+}
+
+/* Скрыть кнопку Записать для вкладки датчиков СГ */
+body.sensors-active .buttons-container {
+    display: none !important;
+}
+
+/* Скрыть кнопку PM для вкладки датчиков СГ */
+body.sensors-active .pm-button-container {
+    display: none !important;
+}
+
+/* Скрыть кнопку датчиков СГ на других вкладках */
+.sensors-button-container {
+    display: none;
+}
+
+body.sensors-active .sensors-button-container {
+    display: block;
+    flex-shrink: 0;
+}
+
+/* Контейнер для параметров датчиков СГ */
+.sensors-parameters-container {
+    display: none;
+    grid-column: 1 / -1;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem 0;
+}
+
+body.sensors-active .sensors-parameters-container {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important; /* Заголовок остается слева */
+    width: 100% !important;
+}
+
+/* Заголовок для датчиков СГ */
+.sensors-title {
+    display: none;
+    margin: 0 0 1rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #495057;
+    text-align: left;
+    grid-column: 1 / -1;
+}
+
+body.sensors-active .sensors-title {
+    display: none !important;
+}
+
+/* Показать основной заголовок для датчиков СГ */
+body.sensors-active .section-header h2 {
+    display: block !important;
+}
+
+/* Контейнер для полей и кнопки датчиков СГ */
+.sensors-fields-container {
+    display: none;
+    grid-column: 1 / -1;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+body.sensors-active .sensors-fields-container {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    width: 100% !important;
+}
+
+
+/* Стили для полей датчиков СГ */
+body.sensors-active .address-field.sensors-only {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-width: 200px;
+    flex: 1;
+    max-width: 250px;
+}
+
+body.sensors-active .address-field.sensors-only label {
+    margin-bottom: 0.25rem;
+    font-weight: 500;
+    color: #333;
+    font-size: 0.9rem;
+}
+
+body.sensors-active .address-field.sensors-only .form-input,
+body.sensors-active .address-field.sensors-only .form-select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    height: 38px; /* Одинаковая высота для всех полей */
+    box-sizing: border-box;
+}
+
+/* Контейнер для кнопки датчиков СГ */
+.sensors-button-container {
+    display: none;
+}
+
+body.sensors-active .sensors-button-container {
+    display: block;
+    grid-column: 1 / -1;
+    justify-self: center;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+/* Скрыть элементы датчиков СГ на других вкладках */
+.address-field.sensors-only {
+    display: none;
+}
+
+body.sensors-active .address-field.sensors-only {
+    display: block;
+}
+
+/* Скрыть таблицу результатов для вкладки датчиков СГ */
+body.sensors-active .results-table {
+    display: none !important;
+}
+
+/* Уменьшить высоту блока настроек для вкладки датчиков СГ */
+body.sensors-active .tab-panel#sensors .panel-header {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+body.sensors-active .tab-panel#sensors .parameters-grid {
+    min-height: auto;
+    padding: 0;
+}
+
+/* Стили для индикаторов связи датчиков СГ */
+.sensors-connection-indicators {
+    display: none;
+}
+
+body.sensors-active .sensors-connection-indicators {
+    display: block;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0 auto 1rem auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 780px;
+    width: 100%;
+}
+
+.connection-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.connection-item:last-child {
+    border-bottom: none;
+}
+
+.connection-label {
+    font-weight: 500;
+    color: #333;
+    flex: 1;
+}
+
+.connection-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.indicator-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: #6c757d;
+    transition: all 0.3s ease;
+}
+
+.connection-indicator[data-state="normal"] .indicator-dot {
+    background-color: #28a745;
+}
+
+.connection-indicator[data-state="error"] .indicator-dot {
+    background-color: #dc3545;
+}
+
+.indicator-text {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.voltage-value {
+    font-size: 0.9rem;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Стили для блоков датчиков СГ */
+.sensors-blocks {
+    display: none;
+}
+
+body.sensors-active .sensors-blocks {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin: 1rem auto 2rem auto;
+    max-width: 900px;
+    justify-items: center;
+}
+
+.sensor-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1rem;
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    border: 2px solid #dee2e6;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    width: 400px;
+    margin: 0 auto;
+    min-height: 80px;
+    transition: all 0.3s ease;
+}
+
+.sensor-block:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+    border-color: #adb5bd;
+}
+
+.block-number {
+    font-weight: 700;
+    font-size: 1rem;
+    color: #495057;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(135deg, #6c757d, #495057);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.indicators-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.2rem;
+    width: fit-content;
+    max-width: 100%;
+    flex-wrap: wrap;
+    margin-top: 0.15rem;
+}
+
+.sensor-indicator {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #6c757d;
+    transition: all 0.3s ease;
+    border: 2px solid #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+}
+
+.sensor-indicator:hover {
+    transform: scale(1.1);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.sensor-indicator[data-state="disconnected"] {
+    background-color: #6c757d;
+    box-shadow: 0 2px 4px rgba(108, 117, 125, 0.3);
+}
+
+.sensor-indicator[data-state="normal"] {
+    background-color: #28a745;
+    box-shadow: 0 2px 6px rgba(40, 167, 69, 0.4);
+    animation: pulse-green 2s infinite;
+}
+
+.sensor-indicator[data-state="high-noise"] {
+    background-color: #dc3545;
+    box-shadow: 0 2px 6px rgba(220, 53, 69, 0.4);
+    animation: pulse-red 1.5s infinite;
+}
+
+.sensor-indicator[data-state="high-signal"] {
+    background-color: #007bff;
+    box-shadow: 0 2px 6px rgba(0, 123, 255, 0.4);
+    animation: pulse-blue 2s infinite;
+}
+
+.sensor-indicator[data-state="connection-error"] {
+    background-color: #000000;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+    animation: pulse-black 1s infinite;
+}
+
+@keyframes pulse-green {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes pulse-red {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+}
+
+@keyframes pulse-blue {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes pulse-black {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
 }
 
 /* PM table row visibility */

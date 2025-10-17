@@ -152,21 +152,9 @@
                     <div id="sensors" class="tab-panel">
                         <div class="panel-header">
                             <h3>Настройки датчиков СГ</h3>
-                            <p>Конфигурация датчиков системы газоанализа</p>
                         </div>
                         <div class="parameters-grid">
-                            <div class="param-card">
-                                <label>Тип датчика</label>
-                                <select class="form-select">
-                                    <option>Датчик CO</option>
-                                    <option>Датчик CH4</option>
-                                    <option>Датчик O2</option>
-                                </select>
-                            </div>
-                            <div class="param-card">
-                                <label>Диапазон измерения</label>
-                                <input type="text" class="form-input" value="0-1000 ppm">
-                            </div>
+                            <!-- Параметры датчиков СГ будут добавлены здесь -->
                         </div>
                     </div>
 
@@ -198,7 +186,8 @@
         <section class="parameters-section">
             <div class="section-header">
                 <h2>Настраиваемые параметры</h2>
-                <div class="parameters-controls">
+            </div>
+            <div class="parameters-controls">
                     <div class="address-grid">
                         <!-- Поле для AM1 (одноканальное устройство) -->
                         <div class="address-field am1-only">
@@ -256,6 +245,55 @@
                             <input type="number" id="pm-address4" class="form-input" value="4" min="1" max="247">
                         </div>
                         
+                        <!-- Параметры для датчиков СГ -->
+                        <div class="sensors-parameters-container">
+                            <h3 class="sensors-title">Настраиваемые параметры</h3>
+                            <div class="sensors-fields-container">
+                                <div class="address-field sensors-only">
+                                    <label for="sensors-address">Адрес:</label>
+                                    <input type="number" id="sensors-address" class="form-input" value="1" min="1" max="247">
+                                </div>
+                                <div class="address-field sensors-only">
+                                    <label for="sensors-count">Количество плат:</label>
+                                    <select id="sensors-count" class="form-select">
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                        <option value="6">6</option>
+                                        <option value="7">7</option>
+                                        <option value="8">8</option>
+                                        <option value="9">9</option>
+                                        <option value="10">10</option>
+                                        <option value="11">11</option>
+                                        <option value="12">12</option>
+                                    </select>
+                                </div>
+                                <div class="address-field sensors-only">
+                                    <label for="sensors-power">Мощность:</label>
+                                    <select id="sensors-power" class="form-select">
+                                        <option value="10">10%</option>
+                                        <option value="20">20%</option>
+                                        <option value="30">30%</option>
+                                        <option value="40">40%</option>
+                                        <option value="50">50%</option>
+                                        <option value="60">60%</option>
+                                        <option value="70">70%</option>
+                                        <option value="80">80%</option>
+                                        <option value="90">90%</option>
+                                        <option value="100">100%</option>
+                                    </select>
+                                </div>
+                                <div class="sensors-button-container">
+                                    <button id="writeBtnSensors" class="btn btn-success">
+                                        <i class="fas fa-save"></i>
+                                        Записать
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        
                         <!-- Кнопка для PM (внутри grid) -->
                         <div class="pm-button-container pm-only">
                             <button id="writeBtnPm" class="btn btn-success">
@@ -263,6 +301,8 @@
                                 Записать
                             </button>
                         </div>
+                        
+                        
                     </div>
                     
                     <!-- Кнопка Записать для всех вкладок -->
@@ -288,6 +328,190 @@
                     </label>
                 </div>
             </div>
+            
+            <!-- Индикаторы связи для датчиков СГ -->
+            <div class="sensors-connection-indicators">
+                <div class="connection-item">
+                    <span class="connection-label">Связь RS485 – компьютер:</span>
+                    <div class="connection-indicator" id="rs485-pc-indicator">
+                        <div class="indicator-dot"></div>
+                        <span class="indicator-text">Не подключено</span>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <span class="connection-label">Связь RS485 Ведущий/Ведомый:</span>
+                    <div class="connection-indicator" id="rs485-master-slave-indicator">
+                        <div class="indicator-dot"></div>
+                        <span class="indicator-text">Не подключено</span>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <span class="connection-label">Тампер Ведущий:</span>
+                    <div class="connection-indicator" id="tamper-master-indicator">
+                        <div class="indicator-dot"></div>
+                        <span class="indicator-text">Не подключено</span>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <span class="connection-label">Тампер Ведомый:</span>
+                    <div class="connection-indicator" id="tamper-slave-indicator">
+                        <div class="indicator-dot"></div>
+                        <span class="indicator-text">Не подключено</span>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <span class="connection-label">Состояние реле:</span>
+                    <div class="connection-indicator" id="relay-status-indicator">
+                        <div class="indicator-dot"></div>
+                        <span class="indicator-text">Не подключено</span>
+                    </div>
+                </div>
+                <div class="connection-item">
+                    <span class="connection-label">Напряжение эл. питания Ведущего (В):</span>
+                    <span class="voltage-value">—</span>
+                </div>
+                <div class="connection-item">
+                    <span class="connection-label">Напряжение эл. питания Ведомого (В):</span>
+                    <span class="voltage-value">—</span>
+                </div>
+            </div>
+            
+            <!-- Блоки датчиков СГ -->
+            <div class="sensors-blocks">
+                <div class="sensor-block">
+                    <div class="block-number">1</div>
+                    <div class="indicators-container">
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                    </div>
+                </div>
+                <div class="sensor-block">
+                    <div class="block-number">2</div>
+                    <div class="indicators-container">
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                    </div>
+                </div>
+                <div class="sensor-block">
+                    <div class="block-number">3</div>
+                    <div class="indicators-container">
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                    </div>
+                </div>
+                <div class="sensor-block">
+                    <div class="block-number">4</div>
+                    <div class="indicators-container">
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                    </div>
+                </div>
+                <div class="sensor-block">
+                    <div class="block-number">5</div>
+                    <div class="indicators-container">
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                    </div>
+                </div>
+                <div class="sensor-block">
+                    <div class="block-number">6</div>
+                    <div class="indicators-container">
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                    </div>
+                </div>
+                <div class="sensor-block">
+                    <div class="block-number">7</div>
+                    <div class="indicators-container">
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                    </div>
+                </div>
+                <div class="sensor-block">
+                    <div class="block-number">8</div>
+                    <div class="indicators-container">
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                    </div>
+                </div>
+                <div class="sensor-block">
+                    <div class="block-number">9</div>
+                    <div class="indicators-container">
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                    </div>
+                </div>
+                <div class="sensor-block">
+                    <div class="block-number">10</div>
+                    <div class="indicators-container">
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                    </div>
+                </div>
+                <div class="sensor-block">
+                    <div class="block-number">11</div>
+                    <div class="indicators-container">
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                    </div>
+                </div>
+                <div class="sensor-block">
+                    <div class="block-number">12</div>
+                    <div class="indicators-container">
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                        <div class="sensor-indicator" data-state="disconnected"></div>
+                    </div>
+                </div>
+            </div>
+            
             <div class="results-table">
                 <div class="table-header">
                     <div class="table-cell">Адрес</div>

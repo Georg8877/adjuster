@@ -32,6 +32,7 @@ class RS485Adjuster {
         this.addressDownBtn = document.getElementById('addressDown');
         this.writeBtn = document.getElementById('writeBtn');
         this.writeBtnPm = document.getElementById('writeBtnPm');
+        this.writeBtnSensors = document.getElementById('writeBtnSensors');
         
         // Check if elements exist
         if (!this.writeBtn && !this.writeBtnPm) {
@@ -100,6 +101,9 @@ class RS485Adjuster {
         }
         if (this.writeBtnPm) {
             this.writeBtnPm.addEventListener('click', () => this.writeParameters());
+        }
+        if (this.writeBtnSensors) {
+            this.writeBtnSensors.addEventListener('click', () => this.writeParameters());
         }
 
         // Tab events
@@ -298,7 +302,17 @@ class RS485Adjuster {
         }
 
         try {
-            const activeButton = document.querySelector('.tab-panel.active').id === 'pm' ? this.writeBtnPm : this.writeBtn;
+            const activePanelId = document.querySelector('.tab-panel.active').id;
+            let activeButton;
+            
+            if (activePanelId === 'pm') {
+                activeButton = this.writeBtnPm;
+            } else if (activePanelId === 'sensors') {
+                activeButton = this.writeBtnSensors;
+            } else {
+                activeButton = this.writeBtn;
+            }
+            
             if (activeButton) {
                 this.showLoading(activeButton);
                 activeButton.disabled = true;
@@ -319,7 +333,17 @@ class RS485Adjuster {
         } catch (error) {
             this.showToast('error', 'Ошибка записи: ' + error.message);
         } finally {
-            const activeButton = document.querySelector('.tab-panel.active').id === 'pm' ? this.writeBtnPm : this.writeBtn;
+            const activePanelId = document.querySelector('.tab-panel.active').id;
+            let activeButton;
+            
+            if (activePanelId === 'pm') {
+                activeButton = this.writeBtnPm;
+            } else if (activePanelId === 'sensors') {
+                activeButton = this.writeBtnSensors;
+            } else {
+                activeButton = this.writeBtn;
+            }
+            
             if (activeButton) {
                 this.hideLoading(activeButton);
                 activeButton.disabled = false;
