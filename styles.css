@@ -89,11 +89,11 @@ body {
 .results-section {
     background: rgba(255, 255, 255, 0.95);
     backdrop-filter: blur(10px);
-    margin: 1rem;
     border-radius: 16px;
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
+
 
 /* Connection Controls */
 .connection-controls {
@@ -297,7 +297,7 @@ body {
 }
 
 .tab-content {
-    padding: 2rem;
+    padding: 12px 24px;
     min-height: 200px;
 }
 
@@ -316,7 +316,7 @@ body {
 }
 
 .panel-header {
-    margin-bottom: 2rem;
+    margin-bottom: 8px;
 }
 
 .panel-header h3 {
@@ -357,7 +357,7 @@ body {
 
 /* Parameters Section */
 .section-header {
-    padding: 2rem;
+    padding: 12px 24px;
     border-bottom: 1px solid #e9ecef;
     display: flex;
     justify-content: space-between;
@@ -421,7 +421,7 @@ body {
     flex-direction: column;
     align-items: center;
     gap: 1.5rem;
-    padding: 2rem;
+    padding: 12px 24px;
 }
 
 .address-control {
@@ -469,7 +469,7 @@ body {
 
 /* Results Section */
 .results-table {
-    margin: 2rem;
+    margin: 0px !important;
     background: white;
     border-radius: 12px;
     overflow: hidden;
@@ -1070,6 +1070,206 @@ body.am1-active .address-grid {
     justify-content: center;
 }
 
+/* Уменьшить высоту блока Настраиваемые параметры для АМ1 на 30% */
+body.am1-active .parameters-section {
+    height: 70%;
+    min-height: 200px;
+}
+
+/* Уменьшить высоту блока Настройки AM1 модуля на 50% */
+body.am1-active .tabs-section {
+    height: 50% !important;
+    min-height: 200px !important;
+    max-height: 300px !important;
+    overflow: hidden !important;
+}
+
+body.am1-active .tab-content {
+    height: 100% !important;
+    overflow: hidden !important;
+}
+
+/* ПРАВИЛЬНЫЕ ОТСТУПЫ ДЛЯ ВСЕХ БЛОКОВ */
+.connection-section {
+    margin: 12px 16px !important;
+}
+
+.tabs-section {
+    margin: 12px 16px !important;
+}
+
+.parameters-section {
+    margin: 12px 16px !important;
+}
+
+.results-section {
+    margin: 12px 16px !important;
+}
+
+/* Специальное исправление для вкладки АМ1 - немного меньше наезд */
+body.am1-active .results-section {
+    margin: 12px 16px !important;
+    margin-top: -220px !important;
+}
+
+/* Специальное исправление для вкладки АМ8 - убираем наезд */
+body.am8-active .results-section {
+    margin: 12px 16px !important;
+    margin-top: -150px !important;
+}
+
+/* Исправляем позиционирование в блоке Настраиваемые параметры для вкладки АМ8 */
+body.am8-active .parameters-controls {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2rem !important;
+    padding: 1.5rem 2rem !important;
+}
+
+body.am8-active .address-grid {
+    margin-bottom: 0 !important;
+    margin-right: 1rem !important;
+    justify-content: center !important;
+    display: flex !important;
+}
+
+body.am8-active .buttons-container {
+    margin-top: 0 !important;
+    margin-left: 1rem !important;
+}
+
+/* Специальное исправление для вкладки PM - больше наезд */
+body.pm-active .results-section {
+    margin: 12px 16px !important;
+    margin-top: -260px !important;
+}
+
+/* Специальное исправление для вкладки Датчики СГ - уменьшаем отступ */
+body.sensors-active .results-section {
+    margin: 12px 16px !important;
+    margin-top: -180px !important;
+}
+
+/* Убираем отступы только у элементов, которые создают проблемы */
+.results-section .sensors-connection-indicators,
+.results-section .sensors-blocks {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+}
+
+/* Восстанавливаем отображение кнопок на всех вкладках */
+.btn, .buttons-container, .address-control, .parameters-controls {
+    display: block !important;
+    margin: initial !important;
+    padding: initial !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+}
+
+/* Восстанавливаем отображение блоков индикаторов для вкладки Датчики СГ */
+body.sensors-active .sensors-connection-indicators {
+    display: block !important;
+    margin: 0 auto 8px auto !important;
+    padding: 1rem !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1) !important;
+    max-width: 780px !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+}
+
+body.sensors-active .sensors-blocks {
+    display: grid !important;
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 1rem !important;
+    margin: 8px auto 8px auto !important;
+    max-width: 900px !important;
+    justify-items: center !important;
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+}
+
+/* УБИРАЕМ ОТСТУПЫ ТОЛЬКО У ОСНОВНЫХ ЭЛЕМЕНТОВ */
+body, html, main, .app-container {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* УБИРАЕМ ОТСТУПЫ У ВСЕХ СЕКЦИЙ */
+section {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+/* ПРИНУДИТЕЛЬНО УБИРАЕМ ОТСТУПЫ У ВСЕХ ЭЛЕМЕНТОВ МЕЖДУ БЛОКАМИ */
+.parameters-section + * {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
+    display: none !important;
+}
+
+body.am1-active .tab-panel#am {
+    height: 100% !important;
+    overflow: hidden !important;
+}
+
+
+/* Разместить поле адреса и кнопку на одной линии для АМ1 */
+body.am1-active .parameters-controls {
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 2rem !important;
+    padding: 1.5rem 2rem !important;
+}
+
+body.am1-active .address-grid {
+    margin-bottom: 0 !important;
+    margin-right: 1rem !important;
+    justify-content: center !important;
+    display: flex !important;
+}
+
+body.am1-active .address-field.am1-only {
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 0.75rem !important;
+    text-align: center !important;
+}
+
+body.am1-active .address-field.am1-only label {
+    margin-bottom: 0 !important;
+    white-space: nowrap !important;
+    font-size: 0.9rem !important;
+}
+
+body.am1-active .address-field.am1-only input {
+    width: 80px !important;
+    height: 40px !important;
+}
+
+body.am1-active .buttons-container {
+    margin-top: 0 !important;
+    margin-left: 1rem !important;
+}
+
 /* Keep 4x2 grid for AM8 */
 body.am8-active .address-grid {
     grid-template-columns: repeat(4, 1fr);
@@ -1111,8 +1311,7 @@ body.pm-active .address-grid {
     margin-left: calc(100% / 4); /* Shift left by one full field width */
 }
 
-/* Restore normal positioning for AM1 and AM8 tabs */
-body.am1-active .address-grid,
+/* Restore normal positioning for AM8 tabs only */
 body.am8-active .address-grid {
     display: grid;
     gap: 1rem;
@@ -1120,16 +1319,11 @@ body.am8-active .address-grid {
     margin-bottom: 2rem;
 }
 
-body.am1-active .address-grid {
-    grid-template-columns: auto;
-}
-
 body.am8-active .address-grid {
     grid-template-columns: auto auto auto auto;
     grid-template-rows: auto auto;
 }
 
-body.am1-active .buttons-container,
 body.am8-active .buttons-container {
     display: flex;
     justify-content: center;
@@ -1183,13 +1377,6 @@ body.pm-active #writeBtnPm {
 }
 
 /* Button styles for different tabs */
-body.am1-active .buttons-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    margin-top: 1rem;
-}
 
 body.am8-active .buttons-container {
     display: flex;
@@ -1356,8 +1543,8 @@ body.sensors-active .results-table {
 
 /* Уменьшить высоту блока настроек для вкладки датчиков СГ */
 body.sensors-active .tab-panel#sensors .panel-header {
-    padding-bottom: 0.5rem;
-    margin-bottom: 0.5rem;
+    padding-bottom: 8px;
+    margin-bottom: 8px;
 }
 
 body.sensors-active .tab-panel#sensors .parameters-grid {
@@ -1367,7 +1554,13 @@ body.sensors-active .tab-panel#sensors .parameters-grid {
 
 /* Стили для индикаторов связи датчиков СГ */
 .sensors-connection-indicators {
-    display: none;
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
 }
 
 body.sensors-active .sensors-connection-indicators {
@@ -1375,7 +1568,7 @@ body.sensors-active .sensors-connection-indicators {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 8px;
     padding: 1rem;
-    margin: 0 auto 1rem auto;
+    margin: 0 auto 8px auto;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     max-width: 780px;
     width: 100%;
@@ -1434,14 +1627,20 @@ body.sensors-active .sensors-connection-indicators {
 
 /* Стили для блоков датчиков СГ */
 .sensors-blocks {
-    display: none;
+    display: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 0 !important;
+    min-height: 0 !important;
+    max-height: 0 !important;
+    overflow: hidden !important;
 }
 
 body.sensors-active .sensors-blocks {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
-    margin: 1rem auto 2rem auto;
+    margin: 8px auto 8px auto;
     max-width: 900px;
     justify-items: center;
 }

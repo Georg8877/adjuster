@@ -25,6 +25,12 @@ function createWindow() {
 
   mainWindow.loadFile('index.html');
 
+  // Очистить кеш при загрузке
+mainWindow.webContents.once('did-finish-load', () => {
+    mainWindow.webContents.session.clearCache();
+    mainWindow.webContents.reload();
+});
+
   // Показать окно когда оно готово
   mainWindow.once('ready-to-show', () => {
     mainWindow.show();
